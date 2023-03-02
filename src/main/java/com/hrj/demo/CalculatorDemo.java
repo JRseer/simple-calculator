@@ -27,6 +27,7 @@ public class CalculatorDemo {
     public static void main(String[] args) {
         System.out.println("欢迎使用简单的计算器");
         Scanner scanner = new Scanner(System.in);
+        //todo 待完成 undo redo
         while(true){
             //获取数字与运算符号
             systemIn(scanner);
