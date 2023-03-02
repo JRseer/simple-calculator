@@ -17,7 +17,7 @@ public class operationAdd implements CalculatorStrategy {
             throw new IllegalArgumentException("入参为null,num1:" + num1 + ",num2:" + num2);
         }
         String result = num1.add(num2).toString();
-        System.out.println("两数相加,结果为" + result);
+        System.out.println(num1 + "+" + num2 + "=" + result);
         return result;
     }
 }

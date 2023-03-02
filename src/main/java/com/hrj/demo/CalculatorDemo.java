@@ -25,17 +25,17 @@ public class CalculatorDemo {
      * @param args
      */
     public static void main(String[] args) {
-        System.out.println("欢迎使用简单的计算器");
+        System.out.println("欢迎使用简单的计算器,目前仅支持加减乘除");
+        CalculatorStrategyFactory calucatorStrategyFactory = new CalculatorStrategyFactory();
         Scanner scanner = new Scanner(System.in);
-        //todo 待完成 undo redo
-        while(true){
+        while (true) {
             //获取数字与运算符号
-            systemIn(scanner);
+            if (!systemIn(scanner)){
+                continue;
+            }
             //计算与结果
-            CalculatorStrategyFactory calucatorStrategyFactory = new CalculatorStrategyFactory();
             String result = calucatorStrategyFactory.doOperate(new BigDecimal(allHashMap.get("num1")), new BigDecimal(allHashMap.get("num2")), allHashMap.get(CALCULATOR));
-            System.out.println("计算结果:" + result);
-            System.out.println("退出程序输入#, 继续请随便输入一个字符");
+            System.out.println("退出程序请输入#, 重新计算请随意输入一个字符");
             String tempStr = scanner.next();
             if (tempStr.equals("#")) {
                 return;
@@ -48,7 +48,7 @@ public class CalculatorDemo {
      *
      * @return
      */
-    public static void systemIn(Scanner scanner) {
+    public static boolean systemIn(Scanner scanner) {
         //todo 未完成对输入数字、运算符号合法校验, 不合法会报错
         System.out.println("请输入第一个数字");
         BigDecimal num1 = scanner.nextBigDecimal();
@@ -59,5 +59,19 @@ public class CalculatorDemo {
         allHashMap.put("num1", num1.toString());
         allHashMap.put(CALCULATOR, calculator);
         allHashMap.put("num2", num2.toString());
+        display();
+        System.out.println("继续执行请输入y,回退请输入任意一个字符");
+        String tempStr = scanner.next();
+        if (tempStr.equals("y")) {
+            return true;
+        }
+        return false;
+    }
+
+    /**
+     * 显示运算表达式
+     */
+    public static void display() {
+        System.out.println("计算:" + allHashMap.get("num1") + allHashMap.get(CALCULATOR) + allHashMap.get("num2"));
     }
 }
