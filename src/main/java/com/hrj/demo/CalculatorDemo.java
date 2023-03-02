@@ -26,14 +26,20 @@ public class CalculatorDemo {
      */
     public static void main(String[] args) {
         System.out.println("欢迎使用简单的计算器");
-        //获取数字与运算符号
-        systemIn();
-        //计算与结果
-        CalculatorStrategyFactory calucatorStrategyFactory = new CalculatorStrategyFactory();
-        String result = calucatorStrategyFactory.doOperate(new BigDecimal(allHashMap.get("num1")), new BigDecimal(allHashMap.get("num2")), allHashMap.get(CALCULATOR));
-        StringBuilder sb = new StringBuilder();
-//        sb.append(num1.toString()).append(calculator).append(num2.toString()).append("=");
-        System.out.println("计算结果:" + sb.toString() + result);
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            //获取数字与运算符号
+            systemIn(scanner);
+            //计算与结果
+            CalculatorStrategyFactory calucatorStrategyFactory = new CalculatorStrategyFactory();
+            String result = calucatorStrategyFactory.doOperate(new BigDecimal(allHashMap.get("num1")), new BigDecimal(allHashMap.get("num2")), allHashMap.get(CALCULATOR));
+            System.out.println("计算结果:" + result);
+            System.out.println("退出程序输入#, 继续请随便输入一个字符");
+            String tempStr = scanner.next();
+            if (tempStr.equals("#")) {
+                return;
+            }
+        }
     }
 
     /**
@@ -41,9 +47,8 @@ public class CalculatorDemo {
      *
      * @return
      */
-    public static void systemIn() {
+    public static void systemIn(Scanner scanner) {
         //todo 未完成对输入数字、运算符号合法校验, 不合法会报错
-        Scanner scanner = new Scanner(System.in);
         System.out.println("请输入第一个数字");
         BigDecimal num1 = scanner.nextBigDecimal();
         System.out.println("请输入运算符号（+ - * / ）");
